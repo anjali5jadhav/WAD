@@ -1,0 +1,32 @@
+//install docker
+//install node.js
+
+//install docker extension in vs code
+
+
+//make two file 
+//1.Dockerfile
+//code as given below
+
+FROM node:alpine
+COPY . /2b    //folder name-2b
+CMD node /2b/app.js
+
+
+//2.app.js
+//code as given below
+
+console.log("Hello");
+console.log("I am");
+console.log("Anjali");
+console.log("From TE-IT");
+
+
+open terminal
+1.docker --version
+2.docker build -t 2b .
+3.docker images
+
+
+
+//done
