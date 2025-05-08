@@ -1,0 +1,101 @@
+//Node.js application
+
+
+//create a new folder 
+inside it create 2 new folder
+1.front
+	a.index.html
+	
+2.back
+	a.server.js
+
+
+a.index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Backend Time Fetcher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 20px;
+      color: green;
+    }
+  </style>
+  <script>
+    async function fetchTime() {
+      try {
+        const response = await fetch('http://localhost:3000/api/time');
+        const data = await response.json();
+        document.getElementById('output').innerHTML = `
+          ${data.message}<br>
+          <strong>Server Time:</strong> ${data.time}
+        `;
+      } catch (err) {
+        document.getElementById('output').innerText = "❌ Failed to connect to backend";
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Real-Time from Backend</h1>
+  <button onclick="fetchTime()">Get Server Time</button>
+  <div id="output"></div>
+</body>
+</html>
+
+
+
+
+a.server.js
+
+const express = require('express');
+const app = express();
+const cors = require('cors');
+
+app.use(cors());
+
+app.get('/api/time', (req, res) => {
+  const currentTime = new Date().toLocaleString();
+  res.json({
+    time: currentTime,
+    message: 'Backend Connected ✅'
+  });
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Backend running at http://localhost:${PORT}`);
+});
+
+
+
+
+
+commands for terminal
+TERMINAL-1
+1.cd .\back\		(cd space tap)
+2. npm init -y
+3. npm install express
+4.node server.js
+5.npm install cors
+6. node server.js
+
+
+TERMINAL-2
+ 1.cd .\front\
+2.start index.html
+
+//DONE
+
