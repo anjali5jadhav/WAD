@@ -1,0 +1,117 @@
+jquery mobile
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Simple Mobile Site</title>
+  <!-- jQuery Mobile CSS -->
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <!-- jQuery + jQuery Mobile JS -->
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <style>
+    .content-padding {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+
+<div data-role="page" id="home">
+  <div data-role="header">
+    <h1>Home</h1>
+  </div>
+
+  <div data-role="content" class="content-padding">
+    <p>Welcome to our simple mobile site!</p>
+    <a href="#about" data-role="button">About Us</a>
+    <a href="#contact" data-role="button" data-theme="b">Contact</a>
+  </div>
+
+  <div data-role="footer">
+    <h4>&copy; 2025 SimpleSite</h4>
+  </div>
+</div>
+
+
+<div data-role="page" id="about">
+  <div data-role="header">
+    <h1>About</h1>
+    <a href="#home" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+  </div>
+
+  <div data-role="content" class="content-padding">
+    <p>This is a basic mobile site made using jQuery Mobile. It's touch-optimized and fast!</p>
+  </div>
+
+  <div data-role="footer">
+    <h4>About Page</h4>
+  </div>
+</div>
+
+
+<div data-role="page" id="contact">
+  <div data-role="header">
+    <h1>Contact</h1>
+    <a href="#home" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+  </div>
+
+  <div data-role="content" class="content-padding">
+
+    <form id="contactForm">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="msg">Message:</label>
+      <textarea name="msg" id="msg" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <div data-role="footer">
+    <h4>Contact Us</h4>
+  </div>
+</div>
+
+<script>
+  $(document).on('pagecreate', '#contact', function() {
+    // Handling form submission
+    $('#contactForm').submit(function(e) {
+      e.preventDefault();  // Prevents the page from refreshing on form submission
+
+      // Collect form data
+      const formData = {
+        name: $('#name').val(),
+        email: $('#email').val(),
+        msg: $('#msg').val()
+      };
+
+      // Simulated AJAX POST (Dummy example using a placeholder URL)
+      $.ajax({
+        url: 'https://jsonplaceholder.typicode.com/posts',  // Dummy URL for testing
+        method: 'POST',
+        data: JSON.stringify(formData),
+        contentType: 'application/json',
+        success: function(response) {
+          alert('Message sent successfully!');
+          // Clear the form after submission
+          $('#contactForm')[0].reset();
+        },
+        error: function(xhr, status, error) {
+          alert('Error: ' + error);
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
